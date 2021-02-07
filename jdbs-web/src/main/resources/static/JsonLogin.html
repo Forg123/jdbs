@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax方式登陆</title>
+</head>
+<body>
+<script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js">
+</script>
+<script>
+    $.ajax({
+        url:'http://localhost:8001/dologin',
+        //url:'',
+        type:'POST',
+        data:{
+            username:'qiqi',
+            password:'123456'
+        },
+        success:function(res){
+            console.log('登陆成功')},
+        fail:function(err){
+            console.log('登陆失败')
+        }
+    })
+</script>
+</body>
+</html>
