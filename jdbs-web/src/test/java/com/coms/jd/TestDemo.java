@@ -22,7 +22,6 @@ public class TestDemo {
         String token = jwtTokenUtil.generateToken(params);
         System.out.println(token);
         System.out.println(jwtTokenUtil.getClaimsFromToken(token));
-         123
          */
         String a = "1";
         String b = "";
