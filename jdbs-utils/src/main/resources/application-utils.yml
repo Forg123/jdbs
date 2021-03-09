@@ -1,3 +1,3 @@
 jwt:
   secret: 123456
-  expiration: 600
+  expiration: 60 * 60
