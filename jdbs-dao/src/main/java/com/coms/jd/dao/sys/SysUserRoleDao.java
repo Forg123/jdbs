@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-@Mapper
+//@Mapper
 public interface SysUserRoleDao {
     /**
      * 根据用户id查询用户角色
