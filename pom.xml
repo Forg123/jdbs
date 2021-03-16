@@ -24,7 +24,7 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
-        <module.version>1.0-SNAPSHOT</module.version>
+        <module.version>0.0.1-SNAPSHOT</module.version>
         <spring.boot.starter.web.version>2.4.2</spring.boot.starter.web.version>
         <spring.boot.start.version>2.4.2</spring.boot.start.version>
         <spring.boot.start.test.version>2.4.2</spring.boot.start.test.version>
