@@ -12,6 +12,18 @@
     <version>0.0.1-SNAPSHOT</version>
     <artifactId>jdbs-iservice</artifactId>
     <packaging>jar</packaging>
+    <dependencies>
+        <!--springboot相关-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
     <build>
         <finalName>qc-offline-report</finalName>
         <plugins>
