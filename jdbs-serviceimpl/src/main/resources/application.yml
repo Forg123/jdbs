@@ -4,7 +4,7 @@ spring:
     include: mybatis , utils
 #启动端口
 server:
-  port: 8002
+  port: 9001
 #dubbo
 dubbo:
   application:

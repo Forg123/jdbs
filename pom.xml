@@ -36,6 +36,7 @@
         <lombok.version>1.18.6</lombok.version>
         <jackson.mapper.asl.version>1.9.13</jackson.mapper.asl.version>
         <dubbo.spring.boot.starter.version>0.2.0</dubbo.spring.boot.starter.version>
+        <javax.servlet.api.version>3.1.0</javax.servlet.api.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -86,6 +87,20 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring.boot.starter.web.version}</version>
+                <!-- 移除嵌入式tomcat插件 -->
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-tomcat</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!--servlet-api依赖-->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax.servlet.api.version}</version>
+                <scope>provided</scope>
             </dependency>
             <!--mybatis相关-->
             <dependency>
