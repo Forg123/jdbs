@@ -86,7 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler(new LocalAccessDeniedHandler());
         // 自定义注销信息
         http.logout() //
-                .logoutUrl("/dologout") // 登出验证地址, 即RequestMapping地址
+                .logoutUrl("jdbs-web/dologout") // 登出验证地址, 即RequestMapping地址
                 .logoutSuccessHandler(new LocalLogoutSuccessHandler()) // 登录验证成功后, 执行的内容
                 // .logoutSuccessUrl("/login?logout") // 登录验证成功后, 跳转的页面, 如果自定义返回内容, 请使用logoutSuccessHandler方法
                 .deleteCookies("JSESSIONID") // 退出登录后需要删除的cookies名称
@@ -119,7 +119,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public LoginFilter  customAuthenticationFilter() throws Exception {
         LoginFilter loginFilter = new LoginFilter();
         // 前端的登录请求地址
-        loginFilter.setFilterProcessesUrl("/dologin");
+        loginFilter.setFilterProcessesUrl("/jdbs-web/dologin");
         // 登录成功后返回给前端的json数据
         loginFilter.setAuthenticationSuccessHandler(new AuthenticationSuccessHandler() {
             @Override
