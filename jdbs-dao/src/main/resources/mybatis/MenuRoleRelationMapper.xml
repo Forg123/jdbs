@@ -16,4 +16,22 @@
         WHERE
         rm.menu_url = #{menuUrl}
     </select>
+    <select id="getMenusByRole" resultType="com.coms.jd.beams.entity.sys.MenusRelstion">
+        SELECT
+            rm.menu_id AS menuId,
+            rm.menu_pid AS menuPid,
+            rm.menu_type AS menuType
+        FROM
+            menu_role_relation AS rr
+            LEFT JOIN rbac_menu AS rm
+            ON rr.menu_id = rm.menu_id
+        WHERE
+            rr.role_id = 'p0001'
+        AND
+            rm.menu_status = '1'
+        AND
+            rr.menu_status = '1'
+        ORDER BY
+            rr.menu_id ASC
+    </select>
 </mapper>

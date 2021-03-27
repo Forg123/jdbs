@@ -1,0 +1,20 @@
+#启动端口
+server:
+  port: 9001
+#dubbo
+dubbo:
+  application:
+    name: JDBS-LOCAL
+  registry:
+    address: 47.98.249.11:2181
+    protocol: zookeeper
+    check: false
+    #监控中心
+    monitor:
+      protocol: register
+    consumer:
+      timeout: 5000
+      check: false
+  protocol:
+    name: dubbo
+    port: 2080

@@ -9,7 +9,6 @@ import java.util.Map;
 @Repository
 @Mapper
 public interface SysUserDao {
-    //@Select("select * from sys_user")
     Map<String , Object> selectUser(Map<String, Object> params);
     /**
      * 根据用户名查询用户的基本信息

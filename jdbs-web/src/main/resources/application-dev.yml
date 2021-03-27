@@ -1,0 +1,19 @@
+server:
+  port: 8001
+#dubbo
+dubbo:
+  application:
+    name: JDBS-DEV
+  registry:
+    address: 47.98.249.11:2181
+    protocol: zookeeper
+    check: false
+    #监控中心
+    monitor:
+      protocol: register
+    consumer:
+      timeout: 50000
+      check: false
+  protocol:
+    name: dubbo
+    port: 2080

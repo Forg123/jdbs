@@ -13,6 +13,10 @@
     <artifactId>jdbs-iservice</artifactId>
     <packaging>jar</packaging>
     <dependencies>
+        <dependency>
+            <groupId>com.jd</groupId>
+            <artifactId>jdbs-beans</artifactId>
+        </dependency>
         <!--springboot相关-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

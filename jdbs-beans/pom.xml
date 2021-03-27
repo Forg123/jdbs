@@ -12,6 +12,13 @@
     <version>0.0.1-SNAPSHOT</version>
     <artifactId>jdbs-beans</artifactId>
     <packaging>jar</packaging>
+    <dependencies>
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
     <build>
         <finalName>qc-offline-report</finalName>
         <plugins>

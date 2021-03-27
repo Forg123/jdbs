@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/**
+ * 动态授权
+ * */
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
     @Reference
@@ -41,6 +44,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
             String password = (String) userInfo.get("userPwd");
             localUserDetails.setUserName(userAccount);
             localUserDetails.setPassword(password);
+            localUserDetails.setRoles(roleCode);
             localUserDetails.setEnabled(true);
             localUserDetails.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList(
                     String.join("," , roleCode)

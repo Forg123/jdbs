@@ -1,8 +1,11 @@
 package com.coms.jd.web.config.security;
 
+import com.coms.jd.beams.entity.sys.MenusRelstion;
+import com.coms.jd.service.sys.GetMenusByRole;
 import com.coms.jd.utils.Result;
 import com.coms.jd.utils.jwt.JwtTokenUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jdk.nashorn.internal.ir.annotations.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,9 +35,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+/**
+ * SpringSecurity配置类
+ * */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -48,6 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CustomFilterInvocationSecurityMetadataSource customFilterInvocationSecurityMetadataSource;
     @Autowired
     private MyAccessDecisionManager myAccessDecisionManager;
+    @Reference
+    private GetMenusByRole getMenusByRole;
     /**
      * 授权管理
      * */
@@ -86,7 +96,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler(new LocalAccessDeniedHandler());
         // 自定义注销信息
         http.logout() //
-                .logoutUrl("jdbs-web/dologout") // 登出验证地址, 即RequestMapping地址
+                .logoutUrl("dologout") // 登出验证地址, 即RequestMapping地址
                 .logoutSuccessHandler(new LocalLogoutSuccessHandler()) // 登录验证成功后, 执行的内容
                 // .logoutSuccessUrl("/login?logout") // 登录验证成功后, 跳转的页面, 如果自定义返回内容, 请使用logoutSuccessHandler方法
                 .deleteCookies("JSESSIONID") // 退出登录后需要删除的cookies名称
@@ -119,7 +129,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public LoginFilter  customAuthenticationFilter() throws Exception {
         LoginFilter loginFilter = new LoginFilter();
         // 前端的登录请求地址
-        loginFilter.setFilterProcessesUrl("/jdbs-web/dologin");
+        loginFilter.setFilterProcessesUrl("/dologin");
         // 登录成功后返回给前端的json数据
         loginFilter.setAuthenticationSuccessHandler(new AuthenticationSuccessHandler() {
             @Override
@@ -129,6 +139,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //获取用户对象集
                 Map<String , Object> userInfo = new HashMap<>();
                 LocalUserDetails principal = (LocalUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                /**
+                 * 1、获取到当前用户的权限
+                 * 2、根据权限获取到该用户所对应的菜单
+                 * 3、根据获取到的数据给菜单排序
+                 * */
+                List<String> roles = principal.getRoles();
+                List<Object> menus = getMenus(roles);
                 userInfo.put("userAccount" , principal.getUsername());
                 Map<String , Object> params = new HashMap<>();
                 params.put("token" , jwtTokenUtil.createTokenByUser(userInfo));
@@ -173,5 +190,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         corsConfiguration.addAllowedMethod("*");    //允许的请求方法，PSOT、GET等
         ((UrlBasedCorsConfigurationSource) source).registerCorsConfiguration("/**",corsConfiguration); //配置允许跨域访问的url
         return source;
+    }
+    /**
+     * 根据权限获取到菜单列表
+     * */
+    private List<Object> getMenus(List<String> params){
+        for (String role : params){
+            List<MenusRelstion> menu = getMenusByRole.getMenusByRole(role);
+        }
+        return null;
     }
 }
