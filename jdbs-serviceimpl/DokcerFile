@@ -1,0 +1,5 @@
+FROM java:8
+COPY *.jar /jdbs-serve.jar
+CMD ["--server.port=9001"]
+EXPOSE 9001
+ENTRYPOINT ["java","-jar","/jdbs-serve.jar","--spring.profiles.active=prod"]

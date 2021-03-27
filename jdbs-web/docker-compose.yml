@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  jdbs-web:
+    build:
+      dockerfile: Dokcerfile
+    image: jdbs-web
+#    depends_on:
+#      - redis
+#    ports:
+#    -
+#  redis:
+#    image:

@@ -1,0 +1,5 @@
+FROM java:8
+COPY *.war jdman-web.war
+CMD ["--server.port=8002"]
+EXPOSE 8002
+ENTRYPOINT ["java" , "-jar" , "/jdman-web.war","--spring.profiles.active=prod"]
