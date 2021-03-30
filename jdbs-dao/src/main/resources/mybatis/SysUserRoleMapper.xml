@@ -6,10 +6,13 @@
 <mapper namespace="com.coms.jd.dao.sys.SysUserRoleDao">
     <select id="selectUserRole" resultType="String">
         SELECT
-        role_id AS role
+        ssr.role_id AS role
         FROM
-        sys_user_role
+        sys_user_role AS ssr
+        LEFT JOIN
+        sys_user AS su
+        ON su.user_id = ssr.user_id
         WHERE
-        user_account = #{userAccount}
+        su.user_account = #{userAccount}
     </select>
 </mapper>

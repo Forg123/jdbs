@@ -1,27 +1,27 @@
 package com.coms.jd.web.config.security;
 
+import com.coms.jd.beans.entity.sys.MenusRelstion;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 @Component
 public class LocalUserDetails implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;//用户权限集合
-    private List<String> roles;
+    private List<MenusRelstion> roles;
     private String password;//用户密码
     private String userName;//用户名
     private boolean accountNonExpired;//用户名知否已经过期
     private boolean accountNonLocked;//用户名是否已经被锁定
     private boolean credentialsNonExpired;//密码是否已经过期
     private boolean enabled;//账户是否启用
-    public List<String> getRoles() {
+    public List<MenusRelstion> getRoles() {
         return roles;
     }
-    public void setRoles(List<String> roles) {
+    public void setRoles(List<MenusRelstion> roles) {
         this.roles = roles;
     }
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {

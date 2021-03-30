@@ -1,12 +1,11 @@
 package com.coms.jd.dao.sys;
 
-import com.coms.jd.beams.entity.sys.MenusRelstion;
+import com.coms.jd.beans.entity.sys.MenusRelstion;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository
 @Mapper

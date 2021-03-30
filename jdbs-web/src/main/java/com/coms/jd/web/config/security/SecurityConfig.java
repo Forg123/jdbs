@@ -1,18 +1,19 @@
 package com.coms.jd.web.config.security;
 
-import com.coms.jd.beams.entity.sys.MenusRelstion;
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.coms.jd.beans.code.ResultCode;
+import com.coms.jd.beans.entity.sys.MenusRelstion;
 import com.coms.jd.service.sys.GetMenusByRole;
 import com.coms.jd.utils.Result;
 import com.coms.jd.utils.jwt.JwtTokenUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jdk.nashorn.internal.ir.annotations.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -25,9 +26,9 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.servlet.ServletException;
@@ -35,16 +36,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * SpringSecurity配置类
  * */
 @Configuration
 @EnableWebSecurity
+@Component
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -65,6 +64,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         md5PasswordEncoder.setUserName("");
         auth.userDetailsService(userDetailService).passwordEncoder(md5PasswordEncoder);
+    }
+    /**
+     * 这里面配置的接口你不需要权限就能访问
+     * */
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/register/sendVerificationCode",
+                "/register/checkOutCode",
+                "/findpassword/sendmail",
+                "/findpassword/checkcode");
     }
     /**
      * 权限控制
@@ -140,17 +149,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 Map<String , Object> userInfo = new HashMap<>();
                 LocalUserDetails principal = (LocalUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 /**
-                 * 1、获取到当前用户的权限
-                 * 2、根据权限获取到该用户所对应的菜单
-                 * 3、根据获取到的数据给菜单排序
+                 * 1、根据权限获取到该用户所对应的菜单
+                 * 2、根据获取到的数据给菜单排序
                  * */
-                List<String> roles = principal.getRoles();
-                List<Object> menus = getMenus(roles);
+                List<MenusRelstion> pars = principal.getRoles();
+                getMenus(pars);
                 userInfo.put("userAccount" , principal.getUsername());
                 Map<String , Object> params = new HashMap<>();
                 params.put("token" , jwtTokenUtil.createTokenByUser(userInfo));
                 Result result = new Result();
-                result.setReturnCode("4000");
+                result.setReturnCode(ResultCode.LOGIN_SUCCESS);
                 result.setReturnMessage("登陆成功");
                 result.setBean(params);
                 PrintWriter out = resp.getWriter();
@@ -193,11 +201,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     /**
      * 根据权限获取到菜单列表
+     * 解决思路：父ID相同的为一组子节点
      * */
-    private List<Object> getMenus(List<String> params){
-        for (String role : params){
-            List<MenusRelstion> menu = getMenusByRole.getMenusByRole(role);
+    private List<Object> getMenus(List<MenusRelstion> params){
+        //List<MenusRelstion> a = getMenusByRole.getMenusByRoles("p00001");
+        List<Object>  menus = new ArrayList<>();
+        for (MenusRelstion menu : params){
+            //父节点,找到这个父节点下面的所有子节点
+            if (menu.getMenuPid() == 0){
+                List<Object> me1 = new ArrayList<>();
+                //
+                menus.add(me1);
+            }
         }
-        return null;
+        return menus;
     }
 }

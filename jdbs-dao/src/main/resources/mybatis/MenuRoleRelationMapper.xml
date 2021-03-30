@@ -16,7 +16,7 @@
         WHERE
         rm.menu_url = #{menuUrl}
     </select>
-    <select id="getMenusByRole" resultType="com.coms.jd.beams.entity.sys.MenusRelstion">
+    <select id="getMenusByRole" resultType="com.coms.jd.beans.entity.sys.MenusRelstion">
         SELECT
             rm.menu_id AS menuId,
             rm.menu_pid AS menuPid,

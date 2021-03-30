@@ -1,31 +1,26 @@
 package com.coms.jd;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.coms.jd.beans.entity.sys.MenusRelstion;
+import com.coms.jd.service.sys.GetMenusByRole;
 import com.coms.jd.utils.jwt.JwtTokenUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 
 @SpringBootTest
 public class TestDemo {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+    @Reference
+    private  GetMenusByRole getMenusByRole;
     @Test
     void testDemo(){
-        /**
-        Map<String , Object> params = new HashMap<>();
-        params.put("useraccount" , "zhangsan");
-        params.put("username" , "张三");
-        String token = jwtTokenUtil.generateToken(params);
-        System.out.println(token);
-        System.out.println(jwtTokenUtil.getClaimsFromToken(token));
-         */
-        String a = "1";
-        String b = "";
-        if (a.equals("") && b.equals("")){
-            System.out.println("==");
-        }else {
-            System.out.println("+++");
-        }
+        List<MenusRelstion> params = getMenusByRole.getMenusByRoles("p0001");
+        System.out.println();
     }
 }
+

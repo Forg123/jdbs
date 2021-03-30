@@ -10,12 +10,17 @@
     <select id="selectUserByAccount" resultType="map">
         SELECT
         user_account AS userAccount,
-        user_pwd AS userPwd
+        user_pwd AS userPwd,
+        user_email AS userEmail,
+        sex AS sex,
+        user_type AS userType
         FROM
         sys_user
         WHERE
         user_account = #{userAccount}
         AND
         login_time &lt; NOW()
+        AND
+        user_status = '2'
     </select>
 </mapper>

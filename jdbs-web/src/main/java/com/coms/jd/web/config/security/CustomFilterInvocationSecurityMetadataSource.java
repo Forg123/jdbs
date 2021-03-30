@@ -22,6 +22,12 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         //获取当前请求的url
         String url = ((FilterInvocation) object).getFullRequestUrl();
+        //清除url前面的东西
+        for (int num = 0 ; num < 3 ; num ++){
+            int count = url.indexOf("/");
+            url = url.substring(count + 1);
+        }
+        url = "/" + url;
         //获取当前url需要的权限
         List<String> roles = selectRoleByUrl.selectRoleByUrl(url);
         //判断有没有查出来数据，若没有则返回一个默认的角色

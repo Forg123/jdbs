@@ -37,6 +37,7 @@
         <jackson.mapper.asl.version>1.9.13</jackson.mapper.asl.version>
         <dubbo.spring.boot.starter.version>0.2.0</dubbo.spring.boot.starter.version>
         <javax.servlet.api.version>3.1.0</javax.servlet.api.version>
+        <spring.boot.starter.log4j2.version>2.4.2</spring.boot.starter.log4j2.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -76,17 +77,38 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
                 <version>${spring.boot.start.version}</version>
+                <!-- 去掉springboot默认配置 -->
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>${spring.boot.start.test.version}</version>
                 <scope>test</scope>
+                <!-- 去掉springboot默认配置 -->
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring.boot.starter.web.version}</version>
+                <!-- 去掉springboot默认配置 -->
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <!--servlet-api依赖-->
             <dependency>
@@ -140,6 +162,12 @@
                 <groupId>com.alibaba.boot</groupId>
                 <artifactId>dubbo-spring-boot-starter</artifactId>
                 <version>${dubbo.spring.boot.starter.version}</version>
+            </dependency>
+            <!-- 引入log4j2依赖 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-log4j2</artifactId>
+                <version>${spring.boot.starter.log4j2.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

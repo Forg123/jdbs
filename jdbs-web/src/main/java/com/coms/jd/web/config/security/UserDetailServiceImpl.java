@@ -1,6 +1,8 @@
 package com.coms.jd.web.config.security;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.coms.jd.beans.entity.sys.MenusRelstion;
+import com.coms.jd.service.sys.GetMenusByRole;
 import com.coms.jd.service.sys.SelectUserByUserAccount;
 import com.coms.jd.service.sys.SelectUserRoleByUserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private LocalUserDetails localUserDetails;
     @Reference
     private SelectUserByUserAccount selectUserByUserAccount;
+    @Reference
+    private GetMenusByRole getMenusByRole;
     private String userAccount;
     public String getUserAccount() {
         return userAccount;
@@ -44,14 +48,20 @@ public class UserDetailServiceImpl implements UserDetailsService {
             String password = (String) userInfo.get("userPwd");
             localUserDetails.setUserName(userAccount);
             localUserDetails.setPassword(password);
-            localUserDetails.setRoles(roleCode);
+            /**
+             * 获取当前符合的菜单
+             * */
+            List<MenusRelstion> roleMenue = new ArrayList();
+            for (String role : roleCode){
+                roleMenue = getMenusByRole.getMenusByRoles(role);
+            }
+            localUserDetails.setRoles(roleMenue);
             localUserDetails.setEnabled(true);
             localUserDetails.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList(
                     String.join("," , roleCode)
             ));
             return localUserDetails;
         }else {
-            System.out.println("当前用户不存在");
             throw new UsernameNotFoundException("当前用户不存在");
         }
     }

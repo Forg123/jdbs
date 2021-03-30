@@ -29,7 +29,8 @@ public class Md5Utils {
         }
         return hexValue.toString();
     }
+
     public static void main(String[] args) {
-        System.out.println(Md5Utils.encode("123456" , ""));
+        System.out.println(encode("123456", ""));
     }
 }
