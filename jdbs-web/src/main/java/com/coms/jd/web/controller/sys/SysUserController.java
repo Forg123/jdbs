@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
 
 /**
  * 用户操作自己信息
@@ -64,11 +67,45 @@ public class SysUserController {
         return csf.csfToResult(input);
     }
     /**
-     * 按照人员信息分页查找相关用户
+     * 根据条件查询用户信息(主要包括权限)
      * */
     @RequestMapping("/getUsers")
     @Rout(controllerName = "sysUserController", moduleName = Rout.ModuleType.JDMAN, methodName = "getUsers")
     public Result getUsers(@RequestBody Input input) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException {
+        //获取当前登陆人的用户权限
+        input.getParams().put("roleLevel" , userInfo.getRoleLevel());
         return csf.csfToResult(input);
+    }
+    /**
+     * 为用户提升修改权限
+     * */
+    @RequestMapping("/updateUserRole")
+    @Rout(controllerName = "sysUserController", moduleName = Rout.ModuleType.JDMAN, methodName = "updateUserRole")
+    public Result updateUserRole(@RequestBody Input input) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException {
+        Result result = new Result();
+        String updateAccount = userInfo.getUserAccount();
+        input.getParams().put("updateAccount" , updateAccount);
+        input.getParams().put("roleLevel" , userInfo.getRoleLevel());
+        String userId = (String) input.getParams().get("userId");
+        String userRole = (String) input.getParams().get("userRole");
+        if (userId == null || userId == ""){
+            result.setReturnCode(ResultCode.ERROR);
+            result.setReturnMessage("修改用户的权限，用户ID不能为空");
+            return result;
+        }
+        if (userRole == null || userRole == ""){
+            result.setReturnCode(ResultCode.ERROR);
+            result.setReturnMessage("修改用户的权限，为用户授予的权限不能为空");
+            return result;
+        }
+        return csf.csfToResult(input);
+    }
+    /**
+     * 对用户进行操作
+     * */
+    public Result banUser(@RequestBody Input input)throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException{
+        Result result = new Result();
+        String userAccount = (String) input.getParams().get("userAccount");
+        return result;
     }
 }

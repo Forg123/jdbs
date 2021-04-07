@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 菜单全西安对应表
+ * 菜单权限对应表
  * */
 @Data
 public class MenusRelstion implements Serializable {

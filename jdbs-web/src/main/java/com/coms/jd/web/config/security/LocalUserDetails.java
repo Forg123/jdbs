@@ -7,21 +7,66 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class LocalUserDetails implements UserDetails {
-    private Collection<? extends GrantedAuthority> authorities;//用户权限集合
-    private List<MenusRelstion> roles;
-    private String password;//用户密码
-    private String userName;//用户名
-    private boolean accountNonExpired;//用户名知否已经过期
-    private boolean accountNonLocked;//用户名是否已经被锁定
-    private boolean credentialsNonExpired;//密码是否已经过期
-    private boolean enabled;//账户是否启用
-    public List<MenusRelstion> getRoles() {
+    /**
+     * 用户全安先集合
+     * */
+    private Collection<? extends GrantedAuthority> authorities;
+    /**
+     * 用户菜单
+     */
+    private List<MenusRelstion> roleMenu;
+    /**
+     * 用户权限
+     * */
+    private List<String> roles;
+    /**
+     * 权限级别
+     * */
+    private int roleLevel;
+    /**
+     * 用户密码
+     * */
+    private String password;
+    /**
+     * 用户名
+     * */
+    private String userName;
+    /**
+     * 用户名知否已经过期
+     * */
+    private boolean accountNonExpired;
+    /**
+     * 用户名是否已经被锁定
+     * */
+    private boolean accountNonLocked;
+    /**
+     * 密码是否已经过期
+     * */
+    private boolean credentialsNonExpired;
+    /**
+     * 账户是否启用
+     * */
+    private boolean enabled;
+    public int getRoleLevel() {
+        return roleLevel;
+    }
+    public void setRoleLevel(int roleLevel) {
+        this.roleLevel = roleLevel;
+    }
+    public List<MenusRelstion> getRoleMenu() {
+        return roleMenu;
+    }
+    public void setRoleMenu(List<MenusRelstion> roleMenu) {
+        this.roleMenu = roleMenu;
+    }
+    public List<String> getRoles() {
         return roles;
     }
-    public void setRoles(List<MenusRelstion> roles) {
+    public void setRoles(List<String> roles) {
         this.roles = roles;
     }
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
@@ -36,7 +81,6 @@ public class LocalUserDetails implements UserDetails {
     public void setAccountNonExpired(boolean accountNonExpired) {
         this.accountNonExpired = accountNonExpired;
     }
-
     public void setAccountNonLocked(boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
     }

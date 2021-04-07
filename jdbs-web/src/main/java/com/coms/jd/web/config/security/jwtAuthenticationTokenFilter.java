@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class jwtAuthenticationTokenFilter extends OncePerRequestFilter {
@@ -39,6 +40,8 @@ public class jwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 //从token中获取负载
                 Map<String , Object> params = jwtTokenUtil.getClaimsFromToken(token);
                 userInfo.setUserAccount((String) params.get("userAccount"));
+                userInfo.setRoleLevel((int)params.get("roleLevel"));
+                userInfo.setRoles((List<String>) params.get("userRoles"));
                 UserDetails userDetails = this.userDetailService.loadUserByUsername((String) params.get("userAccount"));
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

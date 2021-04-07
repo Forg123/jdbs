@@ -46,8 +46,10 @@ public class UserDetailServiceImpl implements UserDetailsService {
         if (userInfo != null){
             String userAccount = (String) userInfo.get("userAccount");
             String password = (String) userInfo.get("userPwd");
+            localUserDetails.setRoleLevel((int)(userInfo.get("roleLevel")));
             localUserDetails.setUserName(userAccount);
             localUserDetails.setPassword(password);
+            localUserDetails.setRoles(roleCode);
             /**
              * 获取当前符合的菜单
              * */
@@ -55,7 +57,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
             for (String role : roleCode){
                 roleMenue = getMenusByRole.getMenusByRoles(role);
             }
-            localUserDetails.setRoles(roleMenue);
+            localUserDetails.setRoleMenu(roleMenue);
             localUserDetails.setEnabled(true);
             localUserDetails.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList(
                     String.join("," , roleCode)

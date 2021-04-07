@@ -73,7 +73,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/register/sendVerificationCode",
                 "/register/checkOutCode",
                 "/findpassword/sendmail",
-                "/findpassword/checkcode");
+                "/findpassword/checkcode",
+                "/login/sendEmail",
+                "/login/doLogin");
     }
     /**
      * 权限控制
@@ -152,9 +154,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                  * 1、根据权限获取到该用户所对应的菜单
                  * 2、根据获取到的数据给菜单排序
                  * */
-                List<MenusRelstion> pars = principal.getRoles();
+                List<MenusRelstion> pars = principal.getRoleMenu();
                 getMenus(pars);
+                userInfo.put("roleLevel" , principal.getRoleLevel());
                 userInfo.put("userAccount" , principal.getUsername());
+                userInfo.put("userRoles" , principal.getRoles());
                 Map<String , Object> params = new HashMap<>();
                 params.put("token" , jwtTokenUtil.createTokenByUser(userInfo));
                 Result result = new Result();

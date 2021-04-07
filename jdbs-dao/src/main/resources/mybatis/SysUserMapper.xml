@@ -13,7 +13,8 @@
         user_pwd AS userPwd,
         user_email AS userEmail,
         sex AS sex,
-        user_type AS userType
+        user_type AS userType,
+        role_level AS roleLevel
         FROM
         sys_user
         WHERE

@@ -18,5 +18,5 @@ dubbo:
     name: dubbo
     port: 2080
 #引入Log4j2文件
-logging:
-  config: classpath:log4j2.xml
+#logging:
+#  config: classpath:log4j2.xml
