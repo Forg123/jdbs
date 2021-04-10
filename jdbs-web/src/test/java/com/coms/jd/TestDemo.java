@@ -19,8 +19,8 @@ public class TestDemo {
     private  GetMenusByRole getMenusByRole;
     @Test
     void testDemo(){
-        List<MenusRelstion> params = getMenusByRole.getMenusByRoles("p0001");
-        System.out.println();
+//        List<MenusRelstion> params = getMenusByRole.getMenusByRoles("p0001");
+//        System.out.println();
     }
 }
 

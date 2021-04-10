@@ -34,7 +34,8 @@ public class jwtAuthenticationTokenFilter extends OncePerRequestFilter {
             try {
                 isToknExpried = !jwtTokenUtil.isTokenExpired(token);
             }catch (Exception e){
-                throw new UsernameNotFoundException("解析出错");
+                //throw new UsernameNotFoundException("解析出错");
+                System.out.println("解析出错");
             }
             if (isToknExpried){
                 //从token中获取负载
