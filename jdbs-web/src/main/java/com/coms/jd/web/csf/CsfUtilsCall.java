@@ -14,13 +14,13 @@ import java.lang.reflect.Method;
 
 @Component
 public class CsfUtilsCall {
-    @Reference(group = "JDMAN_LOCAL" , version = "v0.1")
+    @Reference(group = "JDMAN" , version = "v0.1")
     @Qualifier("csfUtils")
     private CsfUtils csfUtilsMan;
-    @Reference(group = "JDBASE_LOCAL" , version = "v0.1")
+    @Reference(group = "JDBASE" , version = "v0.1")
     @Qualifier("csfUtils")
     private CsfUtils csfUtilsBase;
-    @Reference(group = "JDAPI_LOCAL" , version = "v0.1")
+    @Reference(group = "JDAPI" , version = "v0.1")
     @Qualifier("csfUtils")
     private CsfUtils csfUtilsApi;
     public Result csfToResult(Input input) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {

@@ -1,4 +1,4 @@
 spring:
   #spring引入其他的配置文件
   profiles:
-    include: utils , local
+    include: utils , dev

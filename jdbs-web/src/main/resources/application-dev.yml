@@ -3,7 +3,7 @@ server:
 #dubbo
 dubbo:
   application:
-    name: JDBS-DEV
+    name: JDBS
   registry:
     address: 47.98.249.11:2181
     protocol: zookeeper
@@ -16,4 +16,7 @@ dubbo:
       check: false
   protocol:
     name: dubbo
-    port: 2080
+    port: 2081
+#引入Log4j2文件
+#logging:
+#  config: classpath:log4j2.xml

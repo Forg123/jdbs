@@ -13,17 +13,17 @@ import java.util.List;
 
 @SpringBootTest
 public class TestDemo {
-    @Autowired
-    private GetUser getUser;
-    @Autowired
-    private SysUserDao sysUserDao;
-    @Autowired
-    private MenuRoleRelationDao menuRoleRelationDao;
-    @Autowired
-    private GetMenusByRole getMenusByRole;
-    @Test
-    void testDemo(){
-        //List<MenusRelstion> parmas = getMenusByRole.getMenusByRole("p0001");
-        System.out.println();
-    }
+//    @Autowired
+//    private GetUser getUser;
+//    @Autowired
+//    private SysUserDao sysUserDao;
+//    @Autowired
+//    private MenuRoleRelationDao menuRoleRelationDao;
+//    @Autowired
+//    private GetMenusByRole getMenusByRole;
+//    @Test
+//    void testDemo(){
+//        //List<MenusRelstion> parmas = getMenusByRole.getMenusByRole("p0001");
+//        System.out.println();
+//    }
 }
