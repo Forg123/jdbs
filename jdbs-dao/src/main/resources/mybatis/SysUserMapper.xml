@@ -4,6 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.coms.jd.dao.sys.SysUserDao">
+    <update id="updateLoginToome">
+        	UPDATE
+                sys_user
+            SET
+                login_time = NOW()
+            WHERE
+                user_account = #{userAccount}
+    </update>
     <select id="selectUser" resultType="map" parameterType="map">
          select * from sys_student
     </select>
@@ -19,8 +27,6 @@
         sys_user
         WHERE
         user_account = #{userAccount}
-        AND
-        login_time &lt; NOW()
         AND
         user_status = '2'
     </select>

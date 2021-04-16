@@ -77,6 +77,8 @@ public class HomePageController {
             result.setReturnMessage("页码不能为空");
             return result;
         }
+        input.getParams().put("start" , Integer.parseInt(start));
+        input.getParams().put("limit" , Integer.parseInt(limit));
         return csf.csfToResult(input);
     }
     /**
@@ -98,6 +100,8 @@ public class HomePageController {
             result.setReturnMessage("页码不能为空");
             return result;
         }
+        input.getParams().put("start" , Integer.parseInt(start));
+        input.getParams().put("limit" , Integer.parseInt(limit));
         input.getParams().put("userAccount" , userInfo.getUserAccount());
         return csf.csfToResult(input);
     }

@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.coms.jd.beans.code.ResultCode;
 import com.coms.jd.beans.entity.sys.MenusRelstion;
 import com.coms.jd.service.sys.GetMenusByRole;
+import com.coms.jd.service.sys.SysUserService;
 import com.coms.jd.utils.Result;
 import com.coms.jd.utils.jwt.JwtTokenUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -57,6 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private MyAccessDecisionManager myAccessDecisionManager;
     @Reference
     private GetMenusByRole getMenusByRole;
+    @Reference
+    SysUserService sysUserService;
     /**
      * 授权管理
      * */
@@ -75,7 +78,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/jdbs-web/findpassword/sendmail",
                 "/jdbs-web/findpassword/checkcode",
                 "/jdbs-web/login/sendEmail",
-                "/jdbs-web/login/doLogin");
+                "/jdbs-web/login/doLogin",
+                "/h");
     }
     /**
      * 权限控制
@@ -107,7 +111,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler(new LocalAccessDeniedHandler());
         // 自定义注销信息
         http.logout() //
-                .logoutUrl("/jdbs-web/dologout") // 登出验证地址, 即RequestMapping地址
+                .logoutUrl("/dologout") // 登出验证地址, 即RequestMapping地址
                 .logoutSuccessHandler(new LocalLogoutSuccessHandler()) // 登录验证成功后, 执行的内容
                 // .logoutSuccessUrl("/login?logout") // 登录验证成功后, 跳转的页面, 如果自定义返回内容, 请使用logoutSuccessHandler方法
                 .deleteCookies("JSESSIONID") // 退出登录后需要删除的cookies名称
@@ -140,7 +144,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public LoginFilter  customAuthenticationFilter() throws Exception {
         LoginFilter loginFilter = new LoginFilter();
         // 前端的登录请求地址
-        loginFilter.setFilterProcessesUrl("/jdbs-web/dologin");
+        loginFilter.setFilterProcessesUrl("/dologin");
         // 登录成功后返回给前端的json数据
         loginFilter.setAuthenticationSuccessHandler(new AuthenticationSuccessHandler() {
             @Override
@@ -153,7 +157,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 /**
                  * 1、根据权限获取到该用户所对应的菜单
                  * 2、根据获取到的数据给菜单排序
+                 * 3、修改用户登陆时间
                  * */
+                sysUserService.updateLoginTime(principal.getUsername());
                 List<MenusRelstion> pars = principal.getRoleMenu();
                 getMenus(pars);
                 userInfo.put("roleLevel" , principal.getRoleLevel());

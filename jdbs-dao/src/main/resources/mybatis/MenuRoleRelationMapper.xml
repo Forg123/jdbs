@@ -30,7 +30,7 @@
         AND
             rm.menu_status = '1'
         AND
-            rr.menu_status = '1'
+            rr.menu_role_status = '1'
         ORDER BY
             rr.menu_id ASC
     </select>

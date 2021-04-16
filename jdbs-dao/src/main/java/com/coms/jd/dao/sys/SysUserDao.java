@@ -14,4 +14,8 @@ public interface SysUserDao {
      * 根据用户名查询用户的基本信息
      * */
     Map<String , Object> selectUserByAccount(@Param("userAccount") String userAccount);
+    /**
+     * 根据用户名修改登陆时间
+     * */
+    int updateLoginToome(@Param("userAccount") String userAccount);
 }
