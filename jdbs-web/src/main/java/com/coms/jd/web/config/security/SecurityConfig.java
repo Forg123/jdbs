@@ -73,12 +73,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/jdbs-web/register/sendVerificationCode",
-                "/jdbs-web/register/checkOutCode",
-                "/jdbs-web/findpassword/sendmail",
-                "/jdbs-web/findpassword/checkcode",
-                "/jdbs-web/login/sendEmail",
-                "/jdbs-web/login/doLogin",
+        web.ignoring().antMatchers("/register/sendVerificationCode",
+                "/register/checkOutCode",
+                "/findpassword/sendmail",
+                "/findpassword/checkcode",
+                "/login/sendEmail",
+                "/login/doLogin",
                 "/h");
     }
     /**

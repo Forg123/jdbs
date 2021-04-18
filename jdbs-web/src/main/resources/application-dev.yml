@@ -11,12 +11,16 @@ dubbo:
     #监控中心
     monitor:
       protocol: register
-    consumer:
-      timeout: 50000
-      check: false
+#    consumer:
+#      timeout: 50000
+#      check: false
   protocol:
     name: dubbo
     port: 2081
+  consumer:
+    retries: 0
+    timeout: 50000
+    check: false
 #引入Log4j2文件
 #logging:
 #  config: classpath:log4j2.xml

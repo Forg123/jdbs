@@ -1,5 +1,6 @@
 package com.coms.jd.web.config.security;
 
+import com.coms.jd.beans.code.ResultCode;
 import com.coms.jd.utils.Result;
 import com.coms.jd.utils.jwt.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class LocalAuthenticationSuccessHandler implements AuthenticationSuccessH
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         httpServletResponse.setCharacterEncoding("utf-8");
         httpServletResponse.setContentType("application/json;charset=utf-8");
-        httpServletResponse.getWriter().print("登陆成功");
+        Result result = new Result();
+        result.setReturnCode(ResultCode.LOGIN_SUCCESS);
+        result.setReturnMessage("登陆成功");
+        httpServletResponse.getWriter().print(result);
     }
 }

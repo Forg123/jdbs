@@ -1,5 +1,7 @@
 package com.coms.jd.web.config.security;
 
+import com.coms.jd.beans.code.ResultCode;
+import com.coms.jd.utils.Result;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
@@ -17,6 +19,9 @@ public class LocalAccessDeniedHandler implements AccessDeniedHandler {
             throws IOException, ServletException {
         httpServletResponse.setCharacterEncoding("utf-8");
         httpServletResponse.setContentType("application/json;charset=utf-8");
-        httpServletResponse.getWriter().print("已登陆用户访问无权限资源");
+        Result result = new Result();
+        result.setReturnCode(ResultCode.LOGIN_NO_POWER);
+        result.setReturnCode("已登陆用户访问无权限资源");
+        httpServletResponse.getWriter().print(result);
     }
 }

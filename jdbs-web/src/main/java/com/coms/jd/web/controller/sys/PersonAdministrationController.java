@@ -7,6 +7,7 @@ import com.coms.jd.utils.Rout;
 import com.coms.jd.utils.UserInfo;
 import com.coms.jd.web.csf.CsfUtilsCall;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,7 @@ public class PersonAdministrationController {
     /**
      * 按照条件查询用户
      */
+    @CrossOrigin
     @RequestMapping("/getUsers")
     @Rout(controllerName = "personAdministrationController", moduleName = Rout.ModuleType.JDMAN, methodName = "getUsers")
     public Result getUsers(@RequestBody Input input) throws ClassNotFoundException,
@@ -47,10 +49,10 @@ public class PersonAdministrationController {
         input.getParams().put("limit" , Integer.parseInt(limit));
         return csf.csfToResult(input);
     }
-
     /**
      * 查看用户详情
      */
+    @CrossOrigin
     @RequestMapping("/getUserDetail")
     @Rout(controllerName = "personAdministrationController", moduleName = Rout.ModuleType.JDMAN, methodName = "getUserDetail")
     public Result getUserDetail(@RequestBody Input input) throws ClassNotFoundException,
@@ -68,6 +70,7 @@ public class PersonAdministrationController {
     /**
      * 操作用户，禁用、解除禁用
      */
+    @CrossOrigin
     @RequestMapping("/optUser")
     @Rout(controllerName = "personAdministrationController", moduleName = Rout.ModuleType.JDMAN, methodName = "optUser")
     public Result optUser(@RequestBody Input input) throws ClassNotFoundException,

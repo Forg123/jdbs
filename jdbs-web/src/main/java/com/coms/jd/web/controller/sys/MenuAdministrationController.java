@@ -7,6 +7,7 @@ import com.coms.jd.utils.Rout;
 import com.coms.jd.utils.UserInfo;
 import com.coms.jd.web.csf.CsfUtilsCall;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +29,7 @@ public class MenuAdministrationController {
     /**
      * 修改权限
      * */
+    @CrossOrigin
     @RequestMapping("/updateRoleMenus")
     @Rout(controllerName = "menuAdministrationController" , moduleName = Rout.ModuleType.JDMAN , methodName = "updateRoleMenus")
     public Result updateRoleMenus(@RequestBody Input input) throws ClassNotFoundException,
@@ -44,7 +46,7 @@ public class MenuAdministrationController {
         }
         if (addMenus == null && outMenus == null){
             result.setReturnCode(ResultCode.ERROR);
-            result.setReturnMessage("修改的菜单不能未空");
+            result.setReturnMessage("修改的菜单不能为空");
             return result;
         }
         return csf.csfToResult(input);

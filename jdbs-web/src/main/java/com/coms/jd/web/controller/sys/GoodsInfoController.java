@@ -7,6 +7,7 @@ import com.coms.jd.utils.Rout;
 import com.coms.jd.utils.UserInfo;
 import com.coms.jd.web.csf.CsfUtilsCall;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,7 @@ public class GoodsInfoController {
     /**
      * 查询商品列表
      * */
+    @CrossOrigin
     @RequestMapping("/getGoodsList")
     @Rout(controllerName = "goodsInfoController" , moduleName = Rout.ModuleType.JDBASE , methodName = "getGoodsList")
     public Result getGoodsList(@RequestBody Input input) throws ClassNotFoundException,
@@ -48,6 +50,7 @@ public class GoodsInfoController {
     /**
      * 查询商品详情和价格涨幅情况
      * */
+    @CrossOrigin
     @RequestMapping("/getGoodsDetail")
     @Rout(controllerName = "goodsInfoController" , moduleName = Rout.ModuleType.JDBASE , methodName = "getGoodsDetail")
     public Result getGoodsDetail(@RequestBody Input input) throws ClassNotFoundException,

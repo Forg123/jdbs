@@ -1,5 +1,7 @@
 package com.coms.jd.web.config.security;
 
+import com.coms.jd.beans.code.ResultCode;
+import com.coms.jd.utils.Result;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
@@ -17,6 +19,9 @@ public class LocalLogoutSuccessHandler implements LogoutSuccessHandler {
             throws IOException, ServletException {
         httpServletResponse.setCharacterEncoding("utf-8");
         httpServletResponse.setContentType("application/json;charset=utf-8");
-        httpServletResponse.getWriter().print("注销成功执行返回");
+        Result result = new Result();
+        result.setReturnCode(ResultCode.LOGINOUT_SUCCESS);
+        result.setReturnMessage("注销成功");
+        httpServletResponse.getWriter().print(result);
     }
 }

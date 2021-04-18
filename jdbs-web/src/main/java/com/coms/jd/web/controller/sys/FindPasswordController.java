@@ -7,6 +7,7 @@ import com.coms.jd.utils.Rout;
 import com.coms.jd.utils.UserInfo;
 import com.coms.jd.web.csf.CsfUtilsCall;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,7 @@ public class FindPasswordController {
     /**
      * 找回密码，发送邮件
      * */
+    @CrossOrigin
     @RequestMapping("/sendmail")
     @Rout(controllerName = "findPasswordController" , moduleName = Rout.ModuleType.JDMAN , methodName = "sendVerificationCode")
     public Result sendVerificationCode(@RequestBody Input input) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException {
@@ -41,6 +43,7 @@ public class FindPasswordController {
     /**
      * 找回密码，检查验证码
      * */
+    @CrossOrigin
     @RequestMapping("/checkcode")
     @Rout(controllerName = "findPasswordController" , moduleName = Rout.ModuleType.JDMAN , methodName = "checkOutCode")
     public Result checkOutCode(@RequestBody Input input) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException {

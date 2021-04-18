@@ -7,6 +7,7 @@ import com.coms.jd.utils.Rout;
 import com.coms.jd.utils.UserInfo;
 import com.coms.jd.web.csf.CsfUtilsCall;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,7 @@ public class HomePageController {
     /**
      * 查询用户活跃度
      * */
+    @CrossOrigin
     @RequestMapping("/userActivity")
     @Rout(controllerName = "homePageController" , moduleName = Rout.ModuleType.JDMAN , methodName = "userActivity")
     public Result userActivity(@RequestBody Input input) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -35,6 +37,7 @@ public class HomePageController {
     /***
      * 查询用户新增
      * */
+    @CrossOrigin
     @RequestMapping("/userNewAdd")
     @Rout(controllerName = "homePageController" , moduleName = Rout.ModuleType.JDMAN , methodName = "userNewAdd")
     public Result userNewAdd(@RequestBody Input input) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -43,6 +46,7 @@ public class HomePageController {
     /**
      * 新增留言
      * */
+    @CrossOrigin
     @RequestMapping("/addNewMessage")
     @Rout(controllerName = "homePageController" , moduleName = Rout.ModuleType.JDMAN , methodName = "addNewMessage")
     public Result addNewMessage(@RequestBody Input input) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -61,6 +65,7 @@ public class HomePageController {
     /**
      * 查询留言
      * */
+    @CrossOrigin
     @RequestMapping("/getMessage")
     @Rout(controllerName = "homePageController" , moduleName = Rout.ModuleType.JDMAN , methodName = "getMessage")
     public Result getMessage(@RequestBody Input input) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -84,6 +89,7 @@ public class HomePageController {
     /**
      * 查看待办
      * */
+    @CrossOrigin
     @RequestMapping("/getNeedDo")
     @Rout(controllerName = "homePageController" , moduleName = Rout.ModuleType.JDMAN , methodName = "getNeedDo")
     public Result getNeedDo(@RequestBody Input input) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -108,6 +114,7 @@ public class HomePageController {
     /**
      * 通过待办
      * */
+    @CrossOrigin
     @RequestMapping("/passNeedDo")
     @Rout(controllerName = "homePageController" , moduleName = Rout.ModuleType.JDMAN , methodName = "passNeedDo")
     public Result passNeedDo(@RequestBody Input input) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -124,11 +131,13 @@ public class HomePageController {
             result.setReturnMessage("待办来源ID不允许为空");
             return result;
         }
+        input.getParams().put("needDoSource" , Integer.parseInt(needDoSource));
         return csf.csfToResult(input);
     }
     /**
      * 驳回待办
      * */
+    @CrossOrigin
     @RequestMapping("/rejectNeedDo")
     @Rout(controllerName = "homePageController" , moduleName = Rout.ModuleType.JDMAN , methodName = "rejectNeedDo")
     public Result rejectNeedDo(@RequestBody Input input) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {

@@ -11,9 +11,10 @@ dubbo:
     #监控中心
     monitor:
       protocol: register
-    consumer:
-      timeout: 50000
-      check: false
+  consumer:
+    check: false
+    timeout: 50000
+    retries: 0
   protocol:
     name: dubbo
     port: 2080

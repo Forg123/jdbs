@@ -8,6 +8,7 @@ import com.coms.jd.utils.Rout;
 import com.coms.jd.utils.UserInfo;
 import com.coms.jd.web.csf.CsfUtilsCall;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +29,7 @@ public class ReptileAdministrationController {
     /**
      * 按条件查看爬虫关键字
      * */
+    @CrossOrigin
     @RequestMapping("/getReptileKeyWords")
     @Rout(controllerName = "reptileAdministrationController", moduleName = Rout.ModuleType.JDMAN, methodName = "getReptileKeyWords")
     public Result getReptileKeyWords(@RequestBody Input input) throws ClassNotFoundException,
@@ -52,6 +54,7 @@ public class ReptileAdministrationController {
     /**
      * 查看详情
      * */
+    @CrossOrigin
     @RequestMapping("/getReptileKeyWordsDetail")
     @Rout(controllerName = "reptileAdministrationController", moduleName = Rout.ModuleType.JDMAN, methodName = "getReptileKeyWordsDetail")
     public Result getReptileKeyWordsDetail(@RequestBody Input input) throws ClassNotFoundException,
@@ -68,6 +71,7 @@ public class ReptileAdministrationController {
     /**
      * 修改爬虫关键字
      * */
+    @CrossOrigin
     @RequestMapping("/updateReptileKeywords")
     @Rout(controllerName = "reptileAdministrationController", moduleName = Rout.ModuleType.JDMAN, methodName = "updateReptileKeywords")
     public Result updateReptileKeywords(@RequestBody Input input) throws ClassNotFoundException,
@@ -97,6 +101,7 @@ public class ReptileAdministrationController {
     /**
      * 创建爬虫关键字
      * */
+    @CrossOrigin
     @RequestMapping("/createReptileKeywords")
     @Rout(controllerName = "reptileAdministrationController", moduleName = Rout.ModuleType.JDMAN, methodName = "createReptileKeywords")
     public Result createReptileKeywords(@RequestBody Input input) throws ClassNotFoundException,

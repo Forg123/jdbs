@@ -1,5 +1,7 @@
 package com.coms.jd.web.config.security;
 
+import com.coms.jd.beans.code.ResultCode;
+import com.coms.jd.utils.Result;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -16,6 +18,9 @@ public class LocalAuthenticationEntryPoint implements AuthenticationEntryPoint {
             throws IOException, ServletException {
         httpServletResponse.setCharacterEncoding("utf-8");
         httpServletResponse.setContentType("application/json;charset=utf-8");
+        Result result = new Result();
+        result.setReturnCode(ResultCode.NO_LOGIN_NO_POWER);
+        result.setReturnMessage("未登陆用户访问无权限资源");
         httpServletResponse.getWriter().print("未登陆用户访问无权限资源");
     }
 }

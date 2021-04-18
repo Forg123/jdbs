@@ -8,6 +8,7 @@ import com.coms.jd.utils.UserInfo;
 import com.coms.jd.utils.jwt.JwtTokenUtil;
 import com.coms.jd.web.csf.CsfUtilsCall;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +34,7 @@ public class EmailLoginController {
     /**
      * 邮件登陆发送邮件
      * */
+    @CrossOrigin
     @RequestMapping("/sendEmail")
     @Rout(controllerName = "emailLoginController", moduleName = Rout.ModuleType.JDMAN, methodName = "sendEmail")
     public Result sendEmail(@RequestBody Input input) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException {
@@ -48,6 +50,7 @@ public class EmailLoginController {
     /**
      * 用户邮箱登陆，检查验证码
      * */
+    @CrossOrigin
     @RequestMapping("/doLogin")
     @Rout(controllerName = "emailLoginController", moduleName = Rout.ModuleType.JDMAN, methodName = "doLogin")
     public Result doLogin(@RequestBody Input input) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException {

@@ -1,5 +1,7 @@
 package com.coms.jd.web.config.security;
 
+import com.coms.jd.beans.code.ResultCode;
+import com.coms.jd.utils.Result;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
@@ -17,6 +19,9 @@ public class LocalAuthenticationFailureHandler implements AuthenticationFailureH
             throws IOException, ServletException {
         httpServletResponse.setCharacterEncoding("utf-8");
         httpServletResponse.setContentType("application/json;charset=utf-8");
-        httpServletResponse.getWriter().print("登陆失败返回");
+        Result result = new Result();
+        result.setReturnCode(ResultCode.LOGIN_FILE);
+        result.setReturnMessage("登陆失败");
+        httpServletResponse.getWriter().print(result);
     }
 }

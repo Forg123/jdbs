@@ -7,6 +7,7 @@ import com.coms.jd.utils.Rout;
 import com.coms.jd.utils.UserInfo;
 import com.coms.jd.web.csf.CsfUtilsCall;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +30,7 @@ public class SysUserController {
     /**
      * 用户修改自己的个人信息
      */
+    @CrossOrigin
     @RequestMapping("/updateUserDetails")
     @Rout(controllerName = "sysUserController", moduleName = Rout.ModuleType.JDMAN, methodName = "updateUserDetails")
     public Result updateUserDetails(@RequestBody Input input) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException {
@@ -45,6 +47,7 @@ public class SysUserController {
     /**
      * 查询自己的个人信息
      * */
+    @CrossOrigin
     @RequestMapping("/getUserInfo")
     @Rout(controllerName = "sysUserController", moduleName = Rout.ModuleType.JDMAN, methodName = "getUserInfo")
     public Result getUserInfo(@RequestBody Input input) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException {
@@ -54,6 +57,7 @@ public class SysUserController {
     /**
      * 查询该用户名是否正在使用
      * */
+    @CrossOrigin
     @RequestMapping("/checkUserAccountIsUse")
     @Rout(controllerName = "sysUserController", moduleName = Rout.ModuleType.JDMAN, methodName = "checkUserAccountIsUse")
     public Result checkUserAccountIsUse(@RequestBody Input input) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException {
@@ -69,6 +73,7 @@ public class SysUserController {
     /**
      * 根据条件查询用户信息(主要包括权限)
      * */
+    @CrossOrigin
     @RequestMapping("/getUsers")
     @Rout(controllerName = "sysUserController", moduleName = Rout.ModuleType.JDMAN, methodName = "getUsers")
     public Result getUsers(@RequestBody Input input) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException {
@@ -79,6 +84,7 @@ public class SysUserController {
     /**
      * 为用户提升修改权限
      * */
+    @CrossOrigin
     @RequestMapping("/updateUserRole")
     @Rout(controllerName = "sysUserController", moduleName = Rout.ModuleType.JDMAN, methodName = "updateUserRole")
     public Result updateUserRole(@RequestBody Input input) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException {
